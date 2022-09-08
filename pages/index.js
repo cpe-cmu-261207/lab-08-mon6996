@@ -5,24 +5,23 @@ import { useState } from "react";
 import Canvas from "../components/Canvas";
 import CanvasLib from "../libs/CanvasLib";
 
-export default function Home() {
-  //selected color from color picker
-  //set black color as default
+export default function Home()
+{
   const [selColor, setSelColor] = useState("#000000");
 
-  //16x16 2D Array that holds color data
   const [pixels, setPixels] = useState(CanvasLib.createEmptyCanvas());
 
-  //will be called by Cell component
-  const paint = (xPos, yPos) => {
-    //copy from old 2d Array
+  const paint = (xPos, yPos) =>
+  {
     const newPixels = CanvasLib.copyCanvas(pixels);
-    //your code here
+    newPixels[yPos][xPos] = selColor;
+    setPixels(newPixels);
   };
 
-  const clear = () => {
-    //your code here
-    //Hint : use CanvasLib.createEmptyCanvas()
+  const clear = () =>
+  {
+    const newPixels = CanvasLib.createEmptyCanvas();
+    setPixels(newPixels);
   };
 
   return (
@@ -36,7 +35,12 @@ export default function Home() {
           <button className="btn btn-dark" onClick={clear}>
             Clear
           </button>
-          <button className="btn btn-dark">Random Color</button>
+          <button
+            className="btn btn-dark"
+            onClick={() => setPixels(CanvasLib.createRandomCanvas())}
+          >
+            Random Color
+          </button>
         </div>
       </PainterContext.Provider>
     </div>

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { PainterContext } from "../contexts/PainterContext";
 
-export default function Cell(props) {
+export default function Cell(props)
+{
   const { xPos, yPos } = props;
 
   const { pixels, paint } = useContext(PainterContext);
@@ -12,16 +13,15 @@ export default function Cell(props) {
         width: "40px",
         height: "40px",
 
-        //please replace color with painted color from position xPos, yPos
-        backgroundColor: "#FFFFFF",
+        backgroundColor: pixels[yPos][xPos],
 
         borderWidth: "1px",
         borderStyle: "solid",
         margin: "0px",
       }}
-      onClick={() => {
-        //when clicked, set pixels data at position xPos, yPos with selected color
-        //you code here
+      onClick={() =>
+      {
+        paint(xPos, yPos);
       }}
     ></div>
   );
